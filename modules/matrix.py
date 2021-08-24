@@ -1,8 +1,13 @@
 class ArgumentException(Exception):
+    """Thrown when invalid arguments are passed to a constructor."""
+    
     pass
+
+
 
 class MatrixSegment:
     """Interface describing all methods a matrix segment class must implement."""
+
     # A matrix segment represents a single row or column yet provides a uniform interface for access and manipulation.
 
     def get_length(self) -> int:
@@ -18,8 +23,10 @@ class MatrixSegment:
         pass
 
 
+
 class Matrix:
     """Interface describing all methods a matrix class must implement."""
+
     def get_rows(self) -> int:
         """Get the number of rows in the matrix."""
         pass

@@ -66,7 +66,11 @@ class ComputedMatrixSegmentConstructionTestCase(unittest.TestCase):
 ])
 class ComputedMatrixSegmentTestCase(unittest.TestCase):
     def setUp(self):
-        self.testSubject: matrix.MatrixSegment = matrix_computed.ComputedMatrixSegment(self.segment_length, 0, 1)
+        self.segment_length = 10
+        self.segment_index = 1
+        self.segment_value = 42
+
+        self.testSubject: matrix.MatrixSegment = matrix_computed.ComputedMatrixSegment(self.segment_length, self.segment_index, self.segment_value)
 
     def test_get_length(self):
         self.assertEqual(self.segment_length, self.testSubject.get_length())
@@ -76,7 +80,7 @@ class ComputedMatrixSegmentTestCase(unittest.TestCase):
         (0.5,),
         (1.0,),
     ])
-    def get_element(self, scale: int):
+    def test_get_element(self, scale: int):
         i: int = math.floor(self.segment_length * scale)
 
         if i == self.segment_length:
@@ -86,19 +90,25 @@ class ComputedMatrixSegmentTestCase(unittest.TestCase):
 
         self.assertIsNotNone(result)
 
+    def test_get_element_at_index(self):
+        result: int = self.testSubject.get_element(self.segment_index)
+
+        self.assertEqual(self.segment_value, result)
+
     @parameterized.expand([
         (-10,),
         (-1,),
+        (0,),
         (1,),
         (10,),
     ])
-    def get_element_outofbounds(self, offset: int):
+    def test_get_element_outofbounds(self, offset: int):
         i: int = 0
 
         if offset < 0:
-            i =- offset
+            i = offset
         else:
-            i += offset
+            i = self.segment_length + offset
 
         def act():
             result = self.testSubject.get_element(i)
