@@ -1,6 +1,6 @@
 from matrix import ArgumentException, MatrixSegment
 
-class ComputedError(Exception):
+class ComputedException(Exception):
     pass
 
 class ComputedMatrixSegment(MatrixSegment):
@@ -35,4 +35,4 @@ class ComputedMatrixSegment(MatrixSegment):
         return rtn
 
     def set_element(self, i: int, v: int):
-        raise ComputedError( "Computed segments are not writable." )
+        raise ComputedException( "Computed segments are not writable." )
