@@ -13,6 +13,7 @@ Each module is described below - but at the time is mostly just a port of my [ma
     * Home to Matrix, MatrixSegment, and ArgumentException
 
 * **matrix_computed**
+    * (Still under development)
     * Holds the computed version of MatrixSegment as well as ComputedIdentityMatrix.
     * In short, these implementations try to reduce memory usage by computing the bounds of an identity matrix and returning either zero or the identity value when queried.
 
@@ -21,7 +22,19 @@ Each module is described below - but at the time is mostly just a port of my [ma
     * Holds the concret implementations, RowAlignedMatrix and ColumnAlignedMatrix.
     * Both are adapters to LinearMatrix as underneath all elements are kept in a single demensional array.
 
-* **matrix_opeartions**
+* **matrix_operations**
     * (Still to be developed and tested)
-    * Holds all other operations that can be carried out on a matrix.
-    * Currently holds methods for matrix initialization and matrix multiplication.
+    * Currently holds methods for matrix matrix multiplication.
+
+* **matrix_initializers**
+    * (Still to be developed and tested)
+    * As the name implies, it holds initializer classes to put newly created matrixes into a required state.
+
+## Testing
+
+All unit tests can be found in **modules_test** and there is one file for each module.  Invocation is the same as any other Python module, an example is below for testing the computed module.
+
+```
+$ cd path/to/modules_test
+$ python3 -m unittest -v matrix_computed_test
+```
