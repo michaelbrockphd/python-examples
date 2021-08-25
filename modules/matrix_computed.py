@@ -57,20 +57,31 @@ class ComputedIdentityMatrix(IMatrix):
     """
 
     def __init__(self, n: int, v: int):
+        if n < 1:
+            raise ArgumentException(f"Identity matrixes need positive, non-zero demensions.")
+
         self.num: int = n
         self.val: int = v
 
     def get_rows(self) -> int:
-        pass
+        return self.num
 
     def get_columns(self) -> int:
-        pass
+        return self.num
 
     def get_element(self, r: int, c: int) -> int:
-        pass
+        if not((0 <= r < self.num) and (0 <= c < self.num)):
+            raise IndexError(f"Matrix index [{r},{c}] is out of range.")
+
+        rtn: int = 0
+
+        if r == c:
+            rtn = self.val
+
+        return rtn
 
     def set_element(self, r: int, c: int, v: int):
-        pass
+        raise ComputedException(f"Cannot modify a computed identity matrix.")
 
     def get_row(self, r: int) -> IMatrixSegment:
         pass

@@ -13,9 +13,6 @@ import matrix_computed
 # Computed Matrix Segment - Construction Test Cases ###########################
 
 class ComputedMatrixSegmentConstructionTestCase(unittest.TestCase):
-    def setup(self):
-        pass
-
     @parameterized.expand([
         (-100, 0, 1),
         (-10, 0, 1),
@@ -120,9 +117,6 @@ class ComputedMatrixSegmentTestCase(unittest.TestCase):
 # Computed Identity Matrix - Construction Test Cases ##########################
 
 class ComputedIdentityMatrixConstructionTestCase(unittest.TestCase):
-    def setup(self):
-        pass
-
     @parameterized.expand([
         (-10,),
         (-1,),
@@ -158,18 +152,18 @@ class ComputedIdentityMatrixConstructionTestCase(unittest.TestCase):
     (16, 42),
 ])
 class ComputedIdentityMatrixTestCase(unittest.TestCase):
-    def setup(self):
-        self.testSubject: matrix.IMatrix = matrix_computed.ComputedIdentityMatrix(
+    def setUp(self):
+        self.test_subject: matrix.IMatrix = matrix_computed.ComputedIdentityMatrix(
             self.matrix_demension,
             self.matrix_value)
 
     def test_get_rows(self):
-        result: int = self.testSubject.get_rows()
+        result: int = self.test_subject.get_rows()
 
         self.assertEqual(self.matrix_demension, result)
 
     def test_get_columns(self):
-        result: int = self.testSubject.get_columns()
+        result: int = self.test_subject.get_columns()
 
         self.assertEqual(self.matrix_demension, result)
 
@@ -184,9 +178,11 @@ class ComputedIdentityMatrixTestCase(unittest.TestCase):
             if offset == 0:
                 expected = self.matrix_value
 
-            result: int = self.testSubject.get_element(offset, offset)
+            result1: int = self.test_subject.get_element(0, offset)
+            result2: int = self.test_subject.get_element(offset, 0)
 
-            self.assertEqual(expected, result)
+            self.assertEqual(expected, result1)
+            self.assertEqual(expected, result2)
 
         else:
             self.skipTest(f"Matrix is too small for this test.")
@@ -194,30 +190,28 @@ class ComputedIdentityMatrixTestCase(unittest.TestCase):
     @parameterized.expand([
         (-10,),
         (-1,),
+        (0,),
         (1,),
         (10,),
     ])
     def test_get_element_out_of_bounds(self, offset: int):
-        i: int = 0
+        i: int = offset
 
-        if offset < 0:
-            i -= offset
-
-        else:
-            i = (self.matrix_demension + offset)
+        if 0 <= i:
+            i += self.matrix_demension
 
         def act1():
-            result: int = self.testSubject.get_element(i, 0)
+            result: int = self.test_subject.get_element(i, 0)
 
         def act2():
-            result: int = self.testSubject.get_element(0, i)
+            result: int = self.test_subject.get_element(0, i)
 
         self.assertRaises(IndexError, act1)
         self.assertRaises(IndexError, act2)
 
     def test_set_element(self):
         def act():
-            self.testSubject.set_element(0, 0, 1)
+            self.test_subject.set_element(0, 0, 1)
 
         self.assertRaises(matrix_computed.ComputedException, act)
 
