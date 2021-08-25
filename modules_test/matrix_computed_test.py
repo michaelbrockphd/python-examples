@@ -1,10 +1,8 @@
 import math
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 import unittest
 
 import sys
-
-from parameterized.parameterized import param, parameterized_class
 sys.path.append( '../modules' )
 
 import matrix
