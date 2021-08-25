@@ -7,7 +7,7 @@ class ArgumentException(Exception):
 
 
 
-class MatrixSegment:
+class IMatrixSegment:
     """
     Interface describing all methods a matrix segment class must implement.
     """
@@ -28,7 +28,7 @@ class MatrixSegment:
 
 
 
-class Matrix:
+class IMatrix:
     """
     Interface describing all methods a matrix class must implement.
     """
@@ -49,10 +49,10 @@ class Matrix:
         """Set the value of the specified element."""
         pass
 
-    def get_row(self, r: int) -> MatrixSegment:
+    def get_row(self, r: int) -> IMatrixSegment:
         """Get the whole matrix row."""
         pass
 
-    def get_column(self, c: int) -> MatrixSegment:
+    def get_column(self, c: int) -> IMatrixSegment:
         """Get the whole matrix column."""
         pass

@@ -24,7 +24,7 @@ class ComputedMatrixSegmentConstructionTestCase(unittest.TestCase):
     ])
     def test_construction_invalid_length(self, length: int, index: int, value: int):
         def act():
-            result: matrix.MatrixSegment = matrix_computed.ComputedMatrixSegment( length, index, value)
+            result: matrix.IMatrixSegment = matrix_computed.ComputedMatrixSegment( length, index, value)
 
         self.assertRaises(matrix.ArgumentException, act)
 
@@ -37,7 +37,7 @@ class ComputedMatrixSegmentConstructionTestCase(unittest.TestCase):
     ])
     def test_construction_invalid_index(self, length: int, index: int, value: int):
         def act():
-            result: matrix.MatrixSegment = matrix_computed.ComputedMatrixSegment( length, index, value)
+            result: matrix.IMatrixSegment = matrix_computed.ComputedMatrixSegment( length, index, value)
 
         self.assertRaises(matrix.ArgumentException, act)
 
@@ -47,7 +47,7 @@ class ComputedMatrixSegmentConstructionTestCase(unittest.TestCase):
         (100, 0, 1),
     ])
     def test_construction_valid(self, length: int, index: int, value: int):
-        result: matrix.MatrixSegment = matrix_computed.ComputedMatrixSegment( length, index, value)
+        result: matrix.IMatrixSegment = matrix_computed.ComputedMatrixSegment( length, index, value)
 
         self.assertEqual(length, result.get_length())
 
@@ -68,7 +68,7 @@ class ComputedMatrixSegmentTestCase(unittest.TestCase):
         self.segment_index = 1
         self.segment_value = 42
 
-        self.testSubject: matrix.MatrixSegment = matrix_computed.ComputedMatrixSegment(self.segment_length, self.segment_index, self.segment_value)
+        self.testSubject: matrix.IMatrixSegment = matrix_computed.ComputedMatrixSegment(self.segment_length, self.segment_index, self.segment_value)
 
     def test_get_length(self):
         self.assertEqual(self.segment_length, self.testSubject.get_length())

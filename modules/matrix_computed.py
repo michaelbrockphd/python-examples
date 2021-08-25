@@ -1,4 +1,4 @@
-from matrix import ArgumentException, Matrix, MatrixSegment
+from matrix import ArgumentException, IMatrix, IMatrixSegment
 
 
 
@@ -11,7 +11,7 @@ class ComputedException(Exception):
 
 
 
-class ComputedMatrixSegment(MatrixSegment):
+class ComputedMatrixSegment(IMatrixSegment):
     """
     A computed matrix segment to save memory.
     """
@@ -50,7 +50,7 @@ class ComputedMatrixSegment(MatrixSegment):
 
 
 
-class ComputedIdentityMatrix(Matrix):
+class ComputedIdentityMatrix(IMatrix):
     """
     Matrix implementation that saves on memory by tracking the bounds and
     returning a zero or the identity value where needed.
@@ -72,8 +72,8 @@ class ComputedIdentityMatrix(Matrix):
     def set_element(self, r: int, c: int, v: int):
         pass
 
-    def get_row(self, r: int) -> MatrixSegment:
+    def get_row(self, r: int) -> IMatrixSegment:
         pass
 
-    def get_column(self, c: int) -> MatrixSegment:
+    def get_column(self, c: int) -> IMatrixSegment:
         pass

@@ -1,8 +1,9 @@
-from matrix import ArgumentException, Matrix, MatrixSegment
+from modules.matrix import IMatrixSegment
+from matrix import ArgumentException, IMatrix, IMatrixSegment
 
 
 
-class CreateMatrixSegment:
+class ConcreteMatrixSegment(IMatrixSegment):
     """
     Matrix segment implementation backed by an array.
     """
@@ -33,7 +34,7 @@ class LinearMatrix:
 
 
 
-class RowAlignedMatrix:
+class RowAlignedMatrix(IMatrix):
     """
     Adapter providing a row-aligned matrix.
     """
@@ -54,17 +55,17 @@ class RowAlignedMatrix:
         """Set the value of the specified element."""
         pass
 
-    def get_row(self, r: int) -> MatrixSegment:
+    def get_row(self, r: int) -> IMatrixSegment:
         """Get the whole matrix row."""
         pass
 
-    def get_column(self, c: int) -> MatrixSegment:
+    def get_column(self, c: int) -> IMatrixSegment:
         """Get the whole matrix column."""
         pass
 
 
 
-class ColumnAlignedMatrix:
+class ColumnAlignedMatrix(IMatrix):
     """
     Adapter providing a column-aligned matrix.
     """
@@ -85,10 +86,10 @@ class ColumnAlignedMatrix:
         """Set the value of the specified element."""
         pass
 
-    def get_row(self, r: int) -> MatrixSegment:
+    def get_row(self, r: int) -> IMatrixSegment:
         """Get the whole matrix row."""
         pass
 
-    def get_column(self, c: int) -> MatrixSegment:
+    def get_column(self, c: int) -> IMatrixSegment:
         """Get the whole matrix column."""
         pass
