@@ -64,10 +64,6 @@ class ComputedMatrixSegmentConstructionTestCase(unittest.TestCase):
 ])
 class ComputedMatrixSegmentTestCase(unittest.TestCase):
     def setUp(self):
-        self.segment_length = 10
-        self.segment_index = 1
-        self.segment_value = 42
-
         self.testSubject: matrix.IMatrixSegment = matrix_computed.ComputedMatrixSegment(self.segment_length, self.segment_index, self.segment_value)
 
     def test_get_length(self):
@@ -118,6 +114,114 @@ class ComputedMatrixSegmentTestCase(unittest.TestCase):
             self.testSubject.set_element(0, 24)
 
         self.assertRaises(matrix_computed.ComputedException, act)
+
+
+
+# Computed Identity Matrix - Construction Test Cases ##########################
+
+class ComputedIdentityMatrixConstructionTestCase(unittest.TestCase):
+    def setup(self):
+        pass
+
+    @parameterized.expand([
+        (-10,),
+        (-1,),
+        (0,),
+    ])
+    def test_construction_invalid_demensions(self, n: int):
+        def act() -> None:
+            result: matrix.IMatrix = matrix_computed.ComputedIdentityMatrix(n, 1)
+
+        self.assertRaises(matrix.ArgumentException, act)
+
+    @parameterized.expand([
+        (1,42),
+        (2,42),
+        (4,42),
+    ])
+    def test_construction_valid_parameters(self, n: int, v: int):
+        result: matrix.IMatrix = matrix_computed.ComputedIdentityMatrix(n, v)
+
+        self.assertEqual(n, result.get_rows())
+        self.assertEqual(n, result.get_columns())
+
+        self.assertEqual(v, result.get_element(0, 0))
+
+
+
+# Computed Identity Matrix - Test Cases #######################################
+
+@parameterized_class(('matrix_demension', 'matrix_value'), [
+    (1, 42),
+    (2, 42),
+    (4, 42),
+    (16, 42),
+])
+class ComputedIdentityMatrixTestCase(unittest.TestCase):
+    def setup(self):
+        self.testSubject: matrix.IMatrix = matrix_computed.ComputedIdentityMatrix(
+            self.matrix_demension,
+            self.matrix_value)
+
+    def test_get_rows(self):
+        result: int = self.testSubject.get_rows()
+
+        self.assertEqual(self.matrix_demension, result)
+
+    def test_get_columns(self):
+        result: int = self.testSubject.get_columns()
+
+        self.assertEqual(self.matrix_demension, result)
+
+    @parameterized.expand([
+        (0,),
+        (1,),
+    ])
+    def test_get_element(self, offset: int):
+        if offset < self.matrix_demension:
+            expected: int = 0
+
+            if offset == 0:
+                expected = self.matrix_value
+
+            result: int = self.testSubject.get_element(offset, offset)
+
+            self.assertEqual(expected, result)
+
+        else:
+            self.skipTest(f"Matrix is too small for this test.")
+
+    @parameterized.expand([
+        (-10,),
+        (-1,),
+        (1,),
+        (10,),
+    ])
+    def test_get_element_out_of_bounds(self, offset: int):
+        i: int = 0
+
+        if offset < 0:
+            i -= offset
+
+        else:
+            i = (self.matrix_demension + offset)
+
+        def act1():
+            result: int = self.testSubject.get_element(i, 0)
+
+        def act2():
+            result: int = self.testSubject.get_element(0, i)
+
+        self.assertRaises(IndexError, act1)
+        self.assertRaises(IndexError, act2)
+
+    def test_set_element(self):
+        def act():
+            self.testSubject.set_element(0, 0, 1)
+
+        self.assertRaises(matrix_computed.ComputedException, act)
+
+    # TODO: Implement tests for get_row and get_column.
 
 
 
