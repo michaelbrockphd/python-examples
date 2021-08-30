@@ -30,6 +30,14 @@ class ComputedMatrixSegment(IMatrixSegment):
         self.length: int = l
         self.index: int = i
         self.value: int = v
+
+    def __str__(self):
+        # Be cheeky and construct an array purely for display purposes.
+        arr = [0] * self.length
+
+        arr[self.index] = self.value
+
+        return f"{arr}"
     
     def get_length(self) -> int:
         return self.length
@@ -84,7 +92,11 @@ class ComputedIdentityMatrix(IMatrix):
         raise ComputedException(f"Cannot modify a computed identity matrix.")
 
     def get_row(self, r: int) -> IMatrixSegment:
-        pass
+        rtn: IMatrixSegment = ComputedMatrixSegment(self.num, r, self.val)
+
+        return rtn
 
     def get_column(self, c: int) -> IMatrixSegment:
-        pass
+        rtn: IMatrixSegment = ComputedMatrixSegment(self.num, c, self.val)
+
+        return rtn
