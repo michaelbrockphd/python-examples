@@ -2,10 +2,7 @@ import math
 from parameterized import parameterized, parameterized_class
 import unittest
 
-import sys
-sys.path.append( '../packages' )
-
-from matrix import matrix, matrix_computed
+from ..packages.matrix_pkg import matrix, matrix_computed
 
 
 

@@ -1,7 +1,4 @@
-import sys
-sys.path.append( '../packages' )
-
-from matrix import matrix, matrix_concrete, matrix_initializers, matrix_operations, matrix_computed
+from ..packages.matrix_pkg import matrix, matrix_concrete, matrix_initializers, matrix_operations, matrix_computed
 
 
 
@@ -40,30 +37,30 @@ def demonstrate_sequential(m: matrix.IMatrix, initializer: matrix_initializers.I
 def demonstrate_row_aligned(r: int, c: int, initializer: matrix_initializers.IMatrixInitializer):
     print(f"Row Aligned :: Identity\n")
 
-    matrix: matrix.IMatrix = matrix_concrete.RowAlignedMatrix(r, c)
+    demo_matrix: matrix.IMatrix = matrix_concrete.RowAlignedMatrix(r, c)
 
-    demonstrate_identity(matrix, initializer)
+    demonstrate_identity(demo_matrix, initializer)
 
     print(f"Row Aligned :: Sequential\n")
 
-    matrix = matrix_concrete.RowAlignedMatrix(r, c)
+    demo_matrix = matrix_concrete.RowAlignedMatrix(r, c)
 
-    demonstrate_sequential(matrix, initializer)
+    demonstrate_sequential(demo_matrix, initializer)
 
 
 
 def demonstrate_column_aligned(r: int, c: int, initializer: matrix_initializers.IMatrixInitializer):
     print(f"Column Aligned :: Identity\n")
 
-    matrix: matrix.IMatrix = matrix_concrete.ColumnAlignedMatrix(r, c)
+    demo_matrix: matrix.IMatrix = matrix_concrete.ColumnAlignedMatrix(r, c)
 
-    demonstrate_identity(matrix, initializer)
+    demonstrate_identity(demo_matrix, initializer)
 
     print(f"Column Aligned :: Sequential\n")
 
-    matrix = matrix_concrete.ColumnAlignedMatrix(r, c)
+    demo_matrix = matrix_concrete.ColumnAlignedMatrix(r, c)
 
-    demonstrate_sequential(matrix, initializer)
+    demonstrate_sequential(demo_matrix, initializer)
 
 def demonstrate_multiplication(r: int, c: int, initializer: matrix_initializers.IMatrixInitializer):
     print(f"\nMultiplication Demo 1 :: Both Concrete\n")
