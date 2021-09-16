@@ -3,10 +3,9 @@ from parameterized import parameterized, parameterized_class
 import unittest
 
 import sys
-sys.path.append( '../modules' )
+sys.path.append( '../packages' )
 
-import matrix
-import matrix_computed
+from matrix import matrix, matrix_computed
 
 
 
@@ -61,7 +60,10 @@ class ComputedMatrixSegmentConstructionTestCase(unittest.TestCase):
 ])
 class ComputedMatrixSegmentTestCase(unittest.TestCase):
     def setUp(self):
-        self.testSubject: matrix.IMatrixSegment = matrix_computed.ComputedMatrixSegment(self.segment_length, self.segment_index, self.segment_value)
+        self.testSubject: matrix.IMatrixSegment = matrix_computed.ComputedMatrixSegment(
+            self.segment_length,
+            self.segment_index,
+            self.segment_value)
 
     def test_get_length(self):
         self.assertEqual(self.segment_length, self.testSubject.get_length())

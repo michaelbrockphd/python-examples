@@ -1,5 +1,5 @@
-from matrix import IMatrixSegment, IMatrix
-from matrix_concrete import RowAlignedMatrix
+from .matrix import IMatrixSegment, IMatrix
+from .matrix_concrete import RowAlignedMatrix
 
 
 
@@ -8,7 +8,7 @@ class IMatrixOperations:
     List of methods a helper class must implement to support matrix operations.
     """
 
-    def multiply(a: IMatrix, b: IMatrix) -> IMatrix:
+    def multiply(self, a: IMatrix, b: IMatrix) -> IMatrix:
         """
         Multiply Matrix A with Matrix B.
 
@@ -37,28 +37,28 @@ class UniversalMatrixOperations(IMatrixOperations):
         return rtn
 
     def multiply(self, a: IMatrix, b: IMatrix) -> IMatrix:
-        numR: int = a.get_rows()
-        numC: int = b.get_columns()
+        num_r: int = a.get_rows()
+        num_c: int = b.get_columns()
 
-        rtn: IMatrix = RowAlignedMatrix(numR, numC)
+        rtn: IMatrix = RowAlignedMatrix(num_r, num_c)
 
-        idxR: int = 0
-        idxC: int = 0
+        idx_r: int = 0
+        idx_c: int = 0
 
-        curR: IMatrixSegment = None
-        curC: IMatrixSegment = None
+        cur_r: IMatrixSegment = None
+        cur_c: IMatrixSegment = None
 
-        while idxR < numR:
-            curR = a.get_row(idxR)
-            idxC = 0
+        while idx_r < num_r:
+            cur_r = a.get_row(idx_r)
+            idx_c = 0
 
-            while idxC < numC:
-                curC = b.get_column(idxC)
+            while idx_c < num_c:
+                cur_c = b.get_column(idx_c)
 
-                rtn.set_element(idxR, idxC, self.multiply_segements(curR, curC))
+                rtn.set_element(idx_r, idx_c, self.multiply_segements(cur_r, cur_c))
 
-                idxC += 1
+                idx_c += 1
 
-            idxR += 1
+            idx_r += 1
 
         return rtn

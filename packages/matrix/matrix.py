@@ -42,7 +42,12 @@ class IMatrix:
         pass
 
     def get_element(self, r: int, c: int) -> int:
-        """Get the value of the specified element."""
+        """
+        Get the value of the specified element.
+
+        :param r: Zero-based index of the row to get the element value from.
+        :param c: Zero-based index of the column to get the element value form.
+        """
         pass
 
     def set_element(self, r: int, c: int, v: int):

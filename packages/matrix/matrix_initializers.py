@@ -1,4 +1,4 @@
-from matrix import IMatrix
+from .matrix import IMatrix
 
 
 

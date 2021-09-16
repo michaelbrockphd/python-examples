@@ -1,4 +1,4 @@
-from matrix import ArgumentException, IMatrix, IMatrixSegment
+from .matrix import IMatrix, IMatrixSegment
 
 
 
@@ -23,7 +23,7 @@ class ConcreteMatrixSegment(IMatrixSegment):
         """Get the value at the specified index."""
         length: int = len(self.elements)
 
-        if not(0 <= i and i < length):
+        if not(0 <= i < length):
             raise IndexError(f"Index {i} out of bounds!")
 
         return self.elements[i]
@@ -32,7 +32,7 @@ class ConcreteMatrixSegment(IMatrixSegment):
         """Set the value at the specified index."""
         length: int = len(self.elements)
 
-        if not(0 <= i and i < length):
+        if not(0 <= i < length):
             raise IndexError(f"Index {i} out of bounds!")
         
         self.elements[i] = v

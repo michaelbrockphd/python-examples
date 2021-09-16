@@ -1,4 +1,4 @@
-from matrix import ArgumentException, IMatrix, IMatrixSegment
+from .matrix import ArgumentException, IMatrix, IMatrixSegment
 
 
 

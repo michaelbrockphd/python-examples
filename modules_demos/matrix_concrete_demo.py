@@ -1,11 +1,7 @@
 import sys
-sys.path.append( '../modules' )
+sys.path.append( '../packages' )
 
-import matrix
-import matrix_concrete
-import matrix_initializers
-import matrix_operations
-import matrix_computed
+from matrix import matrix, matrix_concrete, matrix_initializers, matrix_operations, matrix_computed
 
 
 
@@ -74,52 +70,52 @@ def demonstrate_multiplication(r: int, c: int, initializer: matrix_initializers.
 
     print(f"\nMatrix A :: Row Aligned\n")
 
-    matrixA: matrix.IMatrix = matrix_concrete.RowAlignedMatrix(r, c)
+    matrix_a: matrix.IMatrix = matrix_concrete.RowAlignedMatrix(r, c)
 
-    initializer.initialize_as_sequential(matrixA)
+    initializer.initialize_as_sequential(matrix_a)
 
-    print_matrix(matrixA)
+    print_matrix(matrix_a)
 
     print(f"\nMatrix B :: Column Aligned\n")
 
-    matrixB: matrix.IMatrix = matrix_concrete.ColumnAlignedMatrix(r, c)
+    matrix_b: matrix.IMatrix = matrix_concrete.ColumnAlignedMatrix(r, c)
 
-    initializer.initialize_as_identity(matrixB, 2)
+    initializer.initialize_as_identity(matrix_b, 2)
 
-    print_matrix(matrixB)
+    print_matrix(matrix_b)
 
     print(f"\nMatrix C :: Result of A * B\n")
 
     operations: matrix_operations.IMatrixOperations = matrix_operations.UniversalMatrixOperations()
 
-    matrixC: matrix.IMatrix = operations.multiply(matrixA, matrixB)
+    matrix_c: matrix.IMatrix = operations.multiply(matrix_a, matrix_b)
 
-    print_matrix(matrixC)
+    print_matrix(matrix_c)
 
 def demonstrate_multiplication_with_computed(r: int, c: int, initializer: matrix_initializers.IMatrixInitializer):
     print(f"\nMultiplication Demo 2 :: Concrete with Computed\n")
 
     print(f"\nMatrix A :: Row Aligned\n")
 
-    matrixA: matrix.IMatrix = matrix_concrete.RowAlignedMatrix(r, c)
+    matrix_a: matrix.IMatrix = matrix_concrete.RowAlignedMatrix(r, c)
 
-    initializer.initialize_as_sequential(matrixA)
+    initializer.initialize_as_sequential(matrix_a)
 
-    print_matrix(matrixA)
+    print_matrix(matrix_a)
 
     print(f"\nMatrix B :: Computed\n")
 
-    matrixB: matrix.IMatrix = matrix_computed.ComputedIdentityMatrix(r, 2)
+    matrix_b: matrix.IMatrix = matrix_computed.ComputedIdentityMatrix(r, 2)
 
-    print_matrix(matrixB)
+    print_matrix(matrix_b)
 
     print(f"\nMatrix C :: Result of A * B\n")
 
     operations: matrix_operations.IMatrixOperations = matrix_operations.UniversalMatrixOperations()
 
-    matrixC: matrix.IMatrix = operations.multiply(matrixA, matrixB)
+    matrix_c: matrix.IMatrix = operations.multiply(matrix_a, matrix_b)
 
-    print_matrix(matrixC)
+    print_matrix(matrix_c)
 
 
 
